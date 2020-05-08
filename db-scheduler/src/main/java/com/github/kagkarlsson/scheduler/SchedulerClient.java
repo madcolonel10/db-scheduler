@@ -59,7 +59,7 @@ public interface SchedulerClient {
             this.knownTasks = knownTasks;
         }
 
-        public static Builder create(DataSource dataSource, Task<?> ... knownTasks) {
+        public static Builder create(DataSource dataSource, Task<?>... knownTasks) {
             return new Builder(dataSource, Arrays.asList(knownTasks));
         }
 
@@ -113,8 +113,8 @@ public interface SchedulerClient {
             String taskName = taskInstanceId.getTaskName();
             String instanceId = taskInstanceId.getId();
             Optional<Execution> execution = taskRepository.getExecution(taskName, instanceId);
-            if(execution.isPresent()) {
-                if(execution.get().isPicked()) {
+            if (execution.isPresent()) {
+                if (execution.get().isPicked()) {
                     throw new RuntimeException(String.format("Could not reschedule, the execution with name '%s' and id '%s' is currently executing", taskName, instanceId));
                 }
 
@@ -129,7 +129,7 @@ public interface SchedulerClient {
                     notifyListeners(ClientEvent.EventType.RESCHEDULE, taskInstanceId, newExecutionTime);
                 }
             } else {
-                throw new RuntimeException(String.format("Could not reschedule - no task with name '%s' and id '%s' was found." , taskName, instanceId));
+                throw new RuntimeException(String.format("Could not reschedule - no task with name '%s' and id '%s' was found.", taskName, instanceId));
             }
         }
 
@@ -138,15 +138,15 @@ public interface SchedulerClient {
             String taskName = taskInstanceId.getTaskName();
             String instanceId = taskInstanceId.getId();
             Optional<Execution> execution = taskRepository.getExecution(taskName, instanceId);
-            if(execution.isPresent()) {
-                if(execution.get().isPicked()) {
+            if (execution.isPresent()) {
+                if (execution.get().isPicked()) {
                     throw new RuntimeException(String.format("Could not cancel schedule, the execution with name '%s' and id '%s' is currently executing", taskName, instanceId));
                 }
 
                 taskRepository.remove(execution.get());
                 notifyListeners(ClientEvent.EventType.CANCEL, taskInstanceId, execution.get().executionTime);
             } else {
-                throw new RuntimeException(String.format("Could not cancel schedule - no task with name '%s' and id '%s' was found." , taskName, instanceId));
+                throw new RuntimeException(String.format("Could not cancel schedule - no task with name '%s' and id '%s' was found.", taskName, instanceId));
             }
         }
 

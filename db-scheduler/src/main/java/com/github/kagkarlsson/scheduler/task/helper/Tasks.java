@@ -177,7 +177,7 @@ public class Tasks {
             return this;
         }
 
-        public TaskBuilder<T> scheduleOnStartup(String instance, T initialData, Function<Instant,Instant> firstExecutionTime) {
+        public TaskBuilder<T> scheduleOnStartup(String instance, T initialData, Function<Instant, Instant> firstExecutionTime) {
             this.onStartup = new ScheduleOnStartup<T>(instance, initialData, firstExecutionTime);
             return this;
         }

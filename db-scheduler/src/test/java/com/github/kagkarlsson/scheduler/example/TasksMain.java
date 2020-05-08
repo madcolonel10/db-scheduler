@@ -33,15 +33,15 @@ public class TasksMain {
     private static void recurringTask(DataSource dataSource) {
 
         RecurringTask<Void> hourlyTask = Tasks.recurring("my-hourly-task", FixedDelay.ofHours(1))
-                .execute((inst, ctx) -> {
-                    System.out.println("Executed!");
-                });
+            .execute((inst, ctx) -> {
+                System.out.println("Executed!");
+            });
 
         final Scheduler scheduler = Scheduler
-                .create(dataSource)
-                .startTasks(hourlyTask)
-                .threads(5)
-                .build();
+            .create(dataSource)
+            .startTasks(hourlyTask)
+            .threads(5)
+            .build();
 
         // hourlyTask is automatically scheduled on startup if not already started (i.e. exists in the db)
         scheduler.start();
@@ -50,14 +50,14 @@ public class TasksMain {
     private static void adhocTask(DataSource dataSource) {
 
         OneTimeTask<MyTaskData> myAdhocTask = Tasks.oneTime("my-typed-adhoc-task", MyTaskData.class)
-                .execute((inst, ctx) -> {
-                    System.out.println("Executed! Custom data, Id: " + inst.getData().id);
-                });
+            .execute((inst, ctx) -> {
+                System.out.println("Executed! Custom data, Id: " + inst.getData().id);
+            });
 
         final Scheduler scheduler = Scheduler
-                .create(dataSource, myAdhocTask)
-                .threads(5)
-                .build();
+            .create(dataSource, myAdhocTask)
+            .threads(5)
+            .build();
 
         scheduler.start();
 

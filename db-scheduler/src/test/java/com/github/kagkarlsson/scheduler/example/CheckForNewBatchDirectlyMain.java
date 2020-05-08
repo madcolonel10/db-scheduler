@@ -17,15 +17,15 @@ public class CheckForNewBatchDirectlyMain {
     private static void example(DataSource dataSource) {
 
         OneTimeTask<Void> onetimeTask = Tasks.oneTime("my_task")
-                .execute((taskInstance, executionContext) -> {
-                    System.out.println("Executed!");
-                });
+            .execute((taskInstance, executionContext) -> {
+                System.out.println("Executed!");
+            });
 
         final Scheduler scheduler = Scheduler
-                .create(dataSource, onetimeTask)
-                .pollingInterval(Duration.ofSeconds(10))
-                .pollingLimit(4)
-                .build();
+            .create(dataSource, onetimeTask)
+            .pollingInterval(Duration.ofSeconds(10))
+            .pollingLimit(4)
+            .build();
 
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {

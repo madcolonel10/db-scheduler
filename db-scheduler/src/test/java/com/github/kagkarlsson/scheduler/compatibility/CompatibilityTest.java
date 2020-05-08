@@ -27,6 +27,7 @@ import com.github.kagkarlsson.scheduler.task.helper.OneTimeTask;
 import com.github.kagkarlsson.scheduler.task.helper.RecurringTask;
 import com.github.kagkarlsson.scheduler.task.schedule.FixedDelay;
 import com.google.common.collect.Lists;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -68,10 +69,10 @@ public abstract class CompatibilityTest {
 
         statsRegistry = new TestTasks.SimpleStatsRegistry();
         scheduler = Scheduler.create(getDataSource(), Lists.newArrayList(oneTime, recurring))
-                .pollingInterval(Duration.ofMillis(10))
-                .heartbeatInterval(Duration.ofMillis(100))
-                .statsRegistry(statsRegistry)
-                .build();
+            .pollingInterval(Duration.ofMillis(10))
+            .heartbeatInterval(Duration.ofMillis(100))
+            .statsRegistry(statsRegistry)
+            .build();
         stopScheduler.register(scheduler);
     }
 

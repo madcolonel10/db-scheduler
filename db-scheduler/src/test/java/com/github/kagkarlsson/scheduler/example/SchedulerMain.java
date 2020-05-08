@@ -24,62 +24,62 @@ public class SchedulerMain {
 
         // recurring with no data
         RecurringTask<Void> recurring1 = Tasks.recurring("recurring_no_data", FixedDelay.of(Duration.ofSeconds(5)))
-                .onFailureReschedule()   // default
-                .onDeadExecutionRevive() // default
-                .execute((taskInstance, executionContext) -> {
-                    sleep(100);
-                    System.out.println("Executing " + taskInstance.getTaskAndInstance());
-                });
+            .onFailureReschedule()   // default
+            .onDeadExecutionRevive() // default
+            .execute((taskInstance, executionContext) -> {
+                sleep(100);
+                System.out.println("Executing " + taskInstance.getTaskAndInstance());
+            });
 
         // recurring with contant data
         RecurringTask<Integer> recurring2 = Tasks.recurring("recurring_constant_data", FixedDelay.of(Duration.ofSeconds(7)), Integer.class)
-                .initialData(1)
-                .onFailureReschedule()   // default
-                .onDeadExecutionRevive() // default
-                .execute((taskInstance, executionContext) -> {
-                    sleep(100);
-                    System.out.println("Executing " + taskInstance.getTaskAndInstance() + " , data: " + taskInstance.getData());
-                });
+            .initialData(1)
+            .onFailureReschedule()   // default
+            .onDeadExecutionRevive() // default
+            .execute((taskInstance, executionContext) -> {
+                sleep(100);
+                System.out.println("Executing " + taskInstance.getTaskAndInstance() + " , data: " + taskInstance.getData());
+            });
 
         // recurring with changing data
         Schedule custom1Schedule = FixedDelay.of(Duration.ofSeconds(4));
         CustomTask<Integer> custom1 = Tasks.custom("recurring_changing_data", Integer.class)
-                .scheduleOnStartup("instance1", 1, custom1Schedule::getInitialExecutionTime)
-                .onFailureReschedule(custom1Schedule)  // default
-                .onDeadExecutionRevive()               // default
-                .execute((taskInstance, executionContext) -> {
+            .scheduleOnStartup("instance1", 1, custom1Schedule::getInitialExecutionTime)
+            .onFailureReschedule(custom1Schedule)  // default
+            .onDeadExecutionRevive()               // default
+            .execute((taskInstance, executionContext) -> {
 
-                    System.out.println("Executing " + taskInstance.getTaskAndInstance() + " , data: " + taskInstance.getData());
-                    return (executionComplete, executionOperations) -> {
-                        sleep(100);
-                        Instant nextExecutionTime = custom1Schedule.getNextExecutionTime(executionComplete);
-                        int newData = taskInstance.getData() + 1;
-                        executionOperations.reschedule(executionComplete, nextExecutionTime, newData);
-                    };
-                });
+                System.out.println("Executing " + taskInstance.getTaskAndInstance() + " , data: " + taskInstance.getData());
+                return (executionComplete, executionOperations) -> {
+                    sleep(100);
+                    Instant nextExecutionTime = custom1Schedule.getNextExecutionTime(executionComplete);
+                    int newData = taskInstance.getData() + 1;
+                    executionOperations.reschedule(executionComplete, nextExecutionTime, newData);
+                };
+            });
 
         // one-time with no data
         OneTimeTask<Void> onetime1 = Tasks.oneTime("onetime_no_data")
-                .onDeadExecutionRevive()  // default
-                .onFailureRetryLater()    // default
-                .execute((TaskInstance<Void> taskInstance, ExecutionContext executionContext) -> {
-                    sleep(100);
-                    System.out.println("Executing " + taskInstance.getTaskAndInstance());
-                });
+            .onDeadExecutionRevive()  // default
+            .onFailureRetryLater()    // default
+            .execute((TaskInstance<Void> taskInstance, ExecutionContext executionContext) -> {
+                sleep(100);
+                System.out.println("Executing " + taskInstance.getTaskAndInstance());
+            });
 
         // one-time with data
         OneTimeTask<Integer> onetime2 = Tasks.oneTime("onetime_withdata", Integer.class)
-                .onFailureRetryLater()    // default
-                .execute((TaskInstance<Integer> taskInstance, ExecutionContext executionContext) -> {
-                    sleep(100);
-                    System.out.println("Executing " + taskInstance.getTaskAndInstance() + " , data: " + taskInstance.getData());
-                });
+            .onFailureRetryLater()    // default
+            .execute((TaskInstance<Integer> taskInstance, ExecutionContext executionContext) -> {
+                sleep(100);
+                System.out.println("Executing " + taskInstance.getTaskAndInstance() + " , data: " + taskInstance.getData());
+            });
 
 
         final Scheduler scheduler = Scheduler
-                .create(dataSource, onetime1, onetime2)
-                .startTasks(recurring1, recurring2, custom1)
-                .build();
+            .create(dataSource, onetime1, onetime2)
+            .startTasks(recurring1, recurring2, custom1)
+            .build();
 
 
         Runtime.getRuntime().addShutdownHook(new Thread() {

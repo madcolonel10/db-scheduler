@@ -61,7 +61,7 @@ public class Scheduler implements SchedulerClient {
     private int currentGenerationNumber = 1;
 
     protected Scheduler(Clock clock, TaskRepository taskRepository, TaskResolver taskResolver, int threadpoolSize, ExecutorService executorService, SchedulerName schedulerName,
-              Waiter executeDueWaiter, Duration heartbeatInterval, boolean enableImmediateExecution, StatsRegistry statsRegistry, int pollingLimit, Duration deleteUnresolvedAfter, List<OnStartup> onStartup) {
+                        Waiter executeDueWaiter, Duration heartbeatInterval, boolean enableImmediateExecution, StatsRegistry statsRegistry, int pollingLimit, Duration deleteUnresolvedAfter, List<OnStartup> onStartup) {
         this.clock = clock;
         this.taskRepository = taskRepository;
         this.taskResolver = taskResolver;
@@ -129,7 +129,7 @@ public class Scheduler implements SchedulerClient {
             LOG.info("Scheduler stopped.");
         } else {
             LOG.warn("Scheduler stopped, but some tasks did not complete. Was currently running the following executions:\n{}",
-                    new ArrayList<>(currentlyProcessing.keySet()).stream().map(Execution::toString).collect(Collectors.joining("\n")));
+                new ArrayList<>(currentlyProcessing.keySet()).stream().map(Execution::toString).collect(Collectors.joining("\n")));
         }
     }
 
@@ -199,7 +199,7 @@ public class Scheduler implements SchedulerClient {
         statsRegistry.register(SchedulerStatsEvent.RAN_EXECUTE_DUE);
     }
 
-    @SuppressWarnings({"rawtypes","unchecked"})
+    @SuppressWarnings({"rawtypes", "unchecked"})
     protected void detectDeadExecutions() {
         LOG.debug("Deleting executions with unresolved tasks.");
         taskResolver.getUnresolvedTaskNames(deleteUnresolvedAfter)
@@ -348,7 +348,7 @@ public class Scheduler implements SchedulerClient {
                 statsRegistry.register(SchedulerStatsEvent.COMPLETIONHANDLER_ERROR);
                 statsRegistry.register(SchedulerStatsEvent.UNEXPECTED_ERROR);
                 LOG.error("Failed while completing execution {}. Execution will likely remain scheduled and locked/picked. " +
-                        "The execution should be detected as dead in {}, and handled according to the tasks DeadExecutionHandler.", execution, getMaxAgeBeforeConsideredDead(), e);
+                    "The execution should be detected as dead in {}, and handled according to the tasks DeadExecutionHandler.", execution, getMaxAgeBeforeConsideredDead(), e);
             }
         }
 
@@ -361,13 +361,13 @@ public class Scheduler implements SchedulerClient {
                 statsRegistry.register(SchedulerStatsEvent.FAILUREHANDLER_ERROR);
                 statsRegistry.register(SchedulerStatsEvent.UNEXPECTED_ERROR);
                 LOG.error("Failed while completing execution {}. Execution will likely remain scheduled and locked/picked. " +
-                        "The execution should be detected as dead in {}, and handled according to the tasks DeadExecutionHandler.", execution, getMaxAgeBeforeConsideredDead(), e);
+                    "The execution should be detected as dead in {}, and handled according to the tasks DeadExecutionHandler.", execution, getMaxAgeBeforeConsideredDead(), e);
             }
         }
 
     }
 
-    public static SchedulerBuilder create(DataSource dataSource, Task<?> ... knownTasks) {
+    public static SchedulerBuilder create(DataSource dataSource, Task<?>... knownTasks) {
         return create(dataSource, Arrays.asList(knownTasks));
     }
 

@@ -43,18 +43,17 @@ class DueExecutionsBatch {
     }
 
     /**
-     *
      * @param triggerCheckForNewBatch may be triggered more than one in racy conditions
      */
     public void oneExecutionDone(Supplier<Boolean> triggerCheckForNewBatch) {
         executionsLeftInBatch.decrementAndGet();
 
         LOG.trace("Batch state: stale:{}, triggeredExecuteDue:{}, possiblyMoreExecutionsInDb:{}, executionsLeftInBatch:{}, ratio-trigger:{}",
-                stale, triggeredExecuteDue, possiblyMoreExecutionsInDb, executionsLeftInBatch.get(), (threadpoolSize * Scheduler.TRIGGER_NEXT_BATCH_WHEN_AVAILABLE_THREADS_RATIO));
+            stale, triggeredExecuteDue, possiblyMoreExecutionsInDb, executionsLeftInBatch.get(), (threadpoolSize * Scheduler.TRIGGER_NEXT_BATCH_WHEN_AVAILABLE_THREADS_RATIO));
         if (!stale
-                && !triggeredExecuteDue
-                && possiblyMoreExecutionsInDb
-                && executionsLeftInBatch.get() <= (threadpoolSize * Scheduler.TRIGGER_NEXT_BATCH_WHEN_AVAILABLE_THREADS_RATIO)) {
+            && !triggeredExecuteDue
+            && possiblyMoreExecutionsInDb
+            && executionsLeftInBatch.get() <= (threadpoolSize * Scheduler.TRIGGER_NEXT_BATCH_WHEN_AVAILABLE_THREADS_RATIO)) {
             triggeredExecuteDue = triggerCheckForNewBatch.get();
         }
     }

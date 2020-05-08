@@ -44,7 +44,7 @@ public class SchedulerTest {
         return schedulerFor(MoreExecutors.newDirectExecutorService(), tasks);
     }
 
-    private Scheduler schedulerFor(ExecutorService executor, Task<?> ... tasks) {
+    private Scheduler schedulerFor(ExecutorService executor, Task<?>... tasks) {
         final StatsRegistry statsRegistry = StatsRegistry.NOOP;
         TaskResolver taskResolver = new TaskResolver(statsRegistry, clock, Arrays.asList(tasks));
         JdbcTaskRepository taskRepository = new JdbcTaskRepository(postgres.getDataSource(), DEFAULT_TABLE_NAME, taskResolver, new SchedulerName.Fixed("scheduler1"));
@@ -146,7 +146,9 @@ public class SchedulerTest {
     public void should_expose_cause_of_failure_to_completion_handler() throws InterruptedException {
         TestTasks.ResultRegisteringFailureHandler<Void> failureHandler = new TestTasks.ResultRegisteringFailureHandler<>();
         Task<Void> oneTimeTask = ComposableTask.customTask("cause-testing-task", Void.class, TestTasks.REMOVE_ON_COMPLETE, failureHandler,
-                (inst, ctx) -> { throw new RuntimeException("Failed!");});
+            (inst, ctx) -> {
+                throw new RuntimeException("Failed!");
+            });
 
         Scheduler scheduler = schedulerFor(oneTimeTask);
 

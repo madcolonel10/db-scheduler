@@ -9,7 +9,7 @@ public class StopSchedulerExtension implements AfterEachCallback {
 
     private Scheduler[] scheduler = new Scheduler[]{};
 
-    public void register(Scheduler ... scheduler) {
+    public void register(Scheduler... scheduler) {
         this.scheduler = scheduler;
     }
 

@@ -47,36 +47,36 @@ public class RecurringTaskTest {
     public void should_have_starttime_according_to_schedule_by_default() {
 
         RecurringTask<Void> recurringTask = Tasks.recurring("recurring-a", Schedules.daily(LocalTime.of(23, 59)))
-                .execute(TestTasks.DO_NOTHING);
+            .execute(TestTasks.DO_NOTHING);
 
         ManualScheduler scheduler = TestHelper.createManualScheduler(postgres.getDataSource())
-                .clock(clock)
-                .startTasks(Arrays.asList(recurringTask))
-                .build();
+            .clock(clock)
+            .startTasks(Arrays.asList(recurringTask))
+            .build();
 
         scheduler.start();
 
         Optional<ScheduledExecution<Object>> firstExecution = scheduler.getScheduledExecution(TaskInstanceId.of("recurring-a", RecurringTask.INSTANCE));
         assertThat(firstExecution.map(ScheduledExecution::getExecutionTime),
-                contains(ZonedDateTime.of(DATE, LocalTime.of(23, 59), ZONE).toInstant()));
+            contains(ZonedDateTime.of(DATE, LocalTime.of(23, 59), ZONE).toInstant()));
     }
 
     @Test
     public void should_have_starttime_now_if_overridden_by_schedule() {
 
         RecurringTask<Void> recurringTask = Tasks.recurring("recurring-a", Schedules.fixedDelay(Duration.ofHours(1)))
-                .execute(TestTasks.DO_NOTHING);
+            .execute(TestTasks.DO_NOTHING);
 
         ManualScheduler scheduler = TestHelper.createManualScheduler(postgres.getDataSource())
-                .clock(clock)
-                .startTasks(Arrays.asList(recurringTask))
-                .build();
+            .clock(clock)
+            .startTasks(Arrays.asList(recurringTask))
+            .build();
         scheduler.start();
 
         Optional<ScheduledExecution<Object>> firstExecution = scheduler.getScheduledExecution(TaskInstanceId.of("recurring-a", RecurringTask.INSTANCE));
 
         assertThat(firstExecution.map(ScheduledExecution::getExecutionTime),
-                contains(ZonedDateTime.of(DATE, TIME, ZONE).toInstant()));
+            contains(ZonedDateTime.of(DATE, TIME, ZONE).toInstant()));
     }
 
 }

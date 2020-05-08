@@ -17,7 +17,9 @@ package com.github.kagkarlsson.scheduler.boot.actuator;
 
 import com.github.kagkarlsson.scheduler.Scheduler;
 import com.github.kagkarlsson.scheduler.SchedulerState;
+
 import java.util.Objects;
+
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 

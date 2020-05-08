@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class TestableRegistry implements StatsRegistry {
 
     public static final EnumSet<SchedulerStatsEvent> FAILURE_EVENTS = EnumSet.of(SchedulerStatsEvent.UNEXPECTED_ERROR,
-            SchedulerStatsEvent.COMPLETIONHANDLER_ERROR, SchedulerStatsEvent.FAILUREHANDLER_ERROR, SchedulerStatsEvent.DEAD_EXECUTION);
+        SchedulerStatsEvent.COMPLETIONHANDLER_ERROR, SchedulerStatsEvent.FAILUREHANDLER_ERROR, SchedulerStatsEvent.DEAD_EXECUTION);
 
     private static final Logger REGISTRY_LOGGER = LoggerFactory.getLogger(TestableRegistry.class);
 
@@ -125,6 +125,7 @@ public class TestableRegistry implements StatsRegistry {
     private void log(ExecutionStatsEvent e) {
         log("Event: " + e.name());
     }
+
     private void log(ExecutionComplete completeEvent) {
         log("Event execution complete: " + completeEvent.getExecution().toString());
     }
@@ -150,7 +151,7 @@ public class TestableRegistry implements StatsRegistry {
         private List<Condition> waitConditions = new ArrayList<>();
         private boolean logEvents = false;
 
-        public Builder waitConditions(Condition ... waitConditions) {
+        public Builder waitConditions(Condition... waitConditions) {
             this.waitConditions.addAll(Arrays.asList(waitConditions));
             return this;
         }

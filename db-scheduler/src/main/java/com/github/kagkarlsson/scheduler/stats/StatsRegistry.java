@@ -42,7 +42,9 @@ public interface StatsRegistry {
     }
 
     void register(SchedulerStatsEvent e);
+
     void register(CandidateStatsEvent e);
+
     void register(ExecutionStatsEvent e);
 
     void registerSingleCompletedExecution(ExecutionComplete completeEvent);

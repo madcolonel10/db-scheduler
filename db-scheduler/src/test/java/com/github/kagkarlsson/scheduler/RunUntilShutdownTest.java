@@ -23,7 +23,7 @@ public class RunUntilShutdownTest {
         runnable = new TimeLimitedRunnable(2, schedulerState);
         countingWaiter = new CountingWaiter();
         runUntilShutdown = new RunUntilShutdown(runnable, countingWaiter,
-                schedulerState, StatsRegistry.NOOP);
+            schedulerState, StatsRegistry.NOOP);
     }
 
     @Test

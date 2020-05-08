@@ -16,7 +16,6 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-
 public class DailyTest {
 
     private static final ZoneId ZONE = ZoneId.systemDefault();
