@@ -16,6 +16,7 @@
 package com.github.kagkarlsson.examples.boot;
 
 import java.util.concurrent.atomic.AtomicLong;
+
 import org.springframework.stereotype.Service;
 
 @Service

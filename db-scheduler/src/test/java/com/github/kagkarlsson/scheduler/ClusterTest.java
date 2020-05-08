@@ -102,8 +102,8 @@ public class ClusterTest {
 
     private Scheduler createScheduler(String name, Task<?> task, TestTasks.SimpleStatsRegistry stats) {
         return Scheduler.create(DB.getDataSource(), Lists.newArrayList(task))
-                .schedulerName(new SchedulerName.Fixed(name)).pollingInterval(Duration.ofMillis(0))
-                .heartbeatInterval(Duration.ofMillis(100)).statsRegistry(stats).build();
+            .schedulerName(new SchedulerName.Fixed(name)).pollingInterval(Duration.ofMillis(0))
+            .heartbeatInterval(Duration.ofMillis(100)).statsRegistry(stats).build();
     }
 
     private Scheduler createSchedulerRecurring(String name, RecurringTask<?> task, TestTasks.SimpleStatsRegistry stats) {

@@ -16,9 +16,11 @@
 package com.github.kagkarlsson.scheduler.boot.config;
 
 import com.github.kagkarlsson.scheduler.JdbcTaskRepository;
+
 import java.time.Duration;
 import java.util.Optional;
 import javax.validation.constraints.NotNull;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.convert.DurationUnit;
 import org.springframework.validation.annotation.Validated;

@@ -96,7 +96,7 @@ public class JdbcTaskRepositoryTest {
     public void get_due_should_be_sorted() {
         Instant now = Instant.now();
         IntStream.range(0, 100).forEach(i ->
-                        taskRepository.createIfNotExists(new Execution(now.minusSeconds(new Random().nextInt(10000)), oneTimeTask.instance("id" + i)))
+            taskRepository.createIfNotExists(new Execution(now.minusSeconds(new Random().nextInt(10000)), oneTimeTask.instance("id" + i)))
         );
         List<Execution> due = taskRepository.getDue(now, POLLING_LIMIT);
         assertThat(due, hasSize(100));
@@ -269,7 +269,7 @@ public class JdbcTaskRepositoryTest {
     public void get_scheduled_executions() {
         Instant now = Instant.now();
         IntStream.range(0, 100).forEach(i ->
-                taskRepository.createIfNotExists(new Execution(now.plus(new Random().nextInt(10), ChronoUnit.HOURS), oneTimeTask.instance("id" + i)))
+            taskRepository.createIfNotExists(new Execution(now.plus(new Random().nextInt(10), ChronoUnit.HOURS), oneTimeTask.instance("id" + i)))
         );
         List<Execution> beforePick = new ArrayList();
         taskRepository.getScheduledExecutions(beforePick::add);

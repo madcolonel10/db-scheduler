@@ -20,15 +20,15 @@ public class CronMain {
 
         Schedule cron = Schedules.cron("*/10 * * * * ?");
         RecurringTask<Void> cronTask = Tasks.recurring("cron-task", cron)
-                .execute((taskInstance, executionContext) -> {
-                    System.out.println(Instant.now().getEpochSecond() + "s  -  Cron-schedule!");
-                });
+            .execute((taskInstance, executionContext) -> {
+                System.out.println(Instant.now().getEpochSecond() + "s  -  Cron-schedule!");
+            });
 
         final Scheduler scheduler = Scheduler
-                .create(dataSource)
-                .startTasks(cronTask)
-                .pollingInterval(Duration.ofSeconds(1))
-                .build();
+            .create(dataSource)
+            .startTasks(cronTask)
+            .pollingInterval(Duration.ofSeconds(1))
+            .build();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             LOG.info("Received shutdown signal.");

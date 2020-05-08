@@ -59,18 +59,18 @@ public class DeadExecutionsTest {
         jdbcTaskRepository = new JdbcTaskRepository(DB.getDataSource(), DEFAULT_TABLE_NAME, taskResolver, new SchedulerName.Fixed("scheduler1"));
 
         scheduler = new Scheduler(settableClock,
-                jdbcTaskRepository,
-                taskResolver,
-                1,
-                MoreExecutors.newDirectExecutorService(),
-                new SchedulerName.Fixed("test-scheduler"),
-                new Waiter(Duration.ZERO),
-                Duration.ofMinutes(1),
-                false,
-                StatsRegistry.NOOP,
-                POLLING_LIMIT,
-                Duration.ofDays(14),
-                new ArrayList<>());
+            jdbcTaskRepository,
+            taskResolver,
+            1,
+            MoreExecutors.newDirectExecutorService(),
+            new SchedulerName.Fixed("test-scheduler"),
+            new Waiter(Duration.ZERO),
+            Duration.ofMinutes(1),
+            false,
+            StatsRegistry.NOOP,
+            POLLING_LIMIT,
+            Duration.ofDays(14),
+            new ArrayList<>());
 
     }
 
@@ -129,7 +129,8 @@ public class DeadExecutionsTest {
         private final VoidExecutionHandler<T> handler;
 
         public NonCompletingTask(String name, Class<T> dataClass, VoidExecutionHandler<T> handler, DeadExecutionHandler<T> deadExecutionHandler) {
-            super(name, dataClass, (executionComplete, executionOperations) -> {}, deadExecutionHandler);
+            super(name, dataClass, (executionComplete, executionOperations) -> {
+            }, deadExecutionHandler);
             this.handler = handler;
         }
 

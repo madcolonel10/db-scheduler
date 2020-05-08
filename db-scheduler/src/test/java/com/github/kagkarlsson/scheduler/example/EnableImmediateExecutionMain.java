@@ -17,15 +17,15 @@ public class EnableImmediateExecutionMain {
     private static void example(DataSource dataSource) {
 
         OneTimeTask<Void> onetimeTask = Tasks.oneTime("my_task")
-                .execute((taskInstance, executionContext) -> {
-                    System.out.println("Executed!");
-                });
+            .execute((taskInstance, executionContext) -> {
+                System.out.println("Executed!");
+            });
 
         final Scheduler scheduler = Scheduler
-                .create(dataSource, onetimeTask)
-                .pollingInterval(Duration.ofSeconds(5))
-                .enableImmediateExecution()
-                .build();
+            .create(dataSource, onetimeTask)
+            .pollingInterval(Duration.ofSeconds(5))
+            .enableImmediateExecution()
+            .build();
 
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {

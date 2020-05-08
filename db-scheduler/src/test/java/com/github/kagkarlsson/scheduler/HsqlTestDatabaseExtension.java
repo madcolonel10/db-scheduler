@@ -20,6 +20,7 @@ import java.util.function.Consumer;
 public class HsqlTestDatabaseExtension implements BeforeEachCallback, AfterEachCallback {
 
     private DataSource dataSource;
+
     @Override
     public void afterEach(ExtensionContext extensionContext) {
         DatabaseManager.closeDatabases(Database.CLOSEMODE_IMMEDIATELY);

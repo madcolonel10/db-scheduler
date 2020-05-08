@@ -11,16 +11,19 @@ import com.github.kagkarlsson.scheduler.task.VoidExecutionHandler;
 import com.github.kagkarlsson.scheduler.task.helper.OneTimeTask;
 import com.github.kagkarlsson.scheduler.task.helper.RecurringTask;
 import com.github.kagkarlsson.scheduler.task.schedule.FixedDelay;
+
 import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import org.slf4j.LoggerFactory;
 
 public class TestTasks {
 
     public static final CompletionHandler<Void> REMOVE_ON_COMPLETE = new CompletionHandler.OnCompleteRemove<>();
-    public static final VoidExecutionHandler<Void> DO_NOTHING = (taskInstance, executionContext) -> {};
+    public static final VoidExecutionHandler<Void> DO_NOTHING = (taskInstance, executionContext) -> {
+    };
 
     public static <T> OneTimeTask<T> oneTime(String name, Class<T> dataClass, VoidExecutionHandler<T> handler) {
         return new OneTimeTask<T>(name, dataClass) {
@@ -93,6 +96,7 @@ public class TestTasks {
         public CountingHandler() {
             wait = Duration.ofMillis(0);
         }
+
         public CountingHandler(Duration wait) {
             this.wait = wait;
         }

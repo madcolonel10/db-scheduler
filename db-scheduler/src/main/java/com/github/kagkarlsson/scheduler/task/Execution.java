@@ -61,7 +61,7 @@ public final class Execution {
         if (o == null || getClass() != o.getClass()) return false;
         Execution execution = (Execution) o;
         return Objects.equals(executionTime, execution.executionTime) &&
-                Objects.equals(taskInstance, execution.taskInstance);
+            Objects.equals(taskInstance, execution.taskInstance);
     }
 
 
@@ -74,12 +74,12 @@ public final class Execution {
     @Override
     public String toString() {
         return "Execution: " +
-                "task=" + taskInstance.getTaskName() +
-                ", id=" + taskInstance.getId() +
-                ", executionTime=" + executionTime +
-                ", picked=" + picked +
-                ", pickedBy=" + pickedBy +
-                ", lastHeartbeat=" + lastHeartbeat +
-                ", version=" + version;
+            "task=" + taskInstance.getTaskName() +
+            ", id=" + taskInstance.getId() +
+            ", executionTime=" + executionTime +
+            ", picked=" + picked +
+            ", pickedBy=" + pickedBy +
+            ", lastHeartbeat=" + lastHeartbeat +
+            ", version=" + version;
     }
 }

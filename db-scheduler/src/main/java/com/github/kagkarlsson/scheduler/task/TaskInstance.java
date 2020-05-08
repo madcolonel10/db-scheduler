@@ -75,8 +75,8 @@ public final class TaskInstance<T> implements TaskInstanceId {
     @Override
     public String toString() {
         return "TaskInstance: " +
-                "task=" + taskName +
-                ", id=" + id;
+            "task=" + taskName +
+            ", id=" + id;
     }
 
 }

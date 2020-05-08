@@ -25,7 +25,7 @@ public class WaiterTest {
     @Test
     public void should_wait_at_least_duration() throws ExecutionException, InterruptedException {
         Future<Long> waitTime = executor.submit(new WaitForWaiter(new Waiter(Duration.ofMillis(100))));
-        assertTrue(waitTime.get() >= 100L,"Waited: " + waitTime.get());
+        assertTrue(waitTime.get() >= 100L, "Waited: " + waitTime.get());
     }
 
     @Test

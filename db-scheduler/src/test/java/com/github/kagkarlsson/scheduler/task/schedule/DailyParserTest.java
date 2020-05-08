@@ -24,16 +24,16 @@ public class DailyParserTest {
     @Test
     public void should_return_empty_for_non_matching_string() {
         assertScheduleNotPresent(parser, null);
-        assertScheduleNotPresent(parser,"");
-        assertScheduleNotPresent(parser,"LALA|123s");
-        assertScheduleNotPresent(parser,"DAILY|");
-        assertScheduleNotPresent(parser,"DAILY|1200");
-        assertScheduleNotPresent(parser,"DAILY|12:00;13:00");
-        assertScheduleNotPresent(parser,"DAILY|12:00,13:00,");
-        assertScheduleNotPresent(parser,"DAILY|UTC|12:00,13:00");
-        assertScheduleNotPresent(parser,"DAILY|UTC");
-        assertScheduleNotPresent(parser,"DAILY|1200|UTC");
-        assertScheduleNotPresent(parser,"DAILY|12:00,13:00|");
+        assertScheduleNotPresent(parser, "");
+        assertScheduleNotPresent(parser, "LALA|123s");
+        assertScheduleNotPresent(parser, "DAILY|");
+        assertScheduleNotPresent(parser, "DAILY|1200");
+        assertScheduleNotPresent(parser, "DAILY|12:00;13:00");
+        assertScheduleNotPresent(parser, "DAILY|12:00,13:00,");
+        assertScheduleNotPresent(parser, "DAILY|UTC|12:00,13:00");
+        assertScheduleNotPresent(parser, "DAILY|UTC");
+        assertScheduleNotPresent(parser, "DAILY|1200|UTC");
+        assertScheduleNotPresent(parser, "DAILY|12:00,13:00|");
     }
 
     @Test

@@ -39,7 +39,7 @@ class TriggerCheckForDueExecutions implements SchedulerClientEventListener {
 
         if (!schedulerState.isStarted() || schedulerState.isShuttingDown()) {
             LOG.debug("Will not act on scheduling event for execution (task: '{}', id: '{}') as scheduler is starting or shutting down.",
-                    ctx.getTaskInstanceId().getTaskName(), ctx.getTaskInstanceId().getId());
+                ctx.getTaskInstanceId().getTaskName(), ctx.getTaskInstanceId().getId());
             return;
         }
 
@@ -48,7 +48,7 @@ class TriggerCheckForDueExecutions implements SchedulerClientEventListener {
             Instant scheduledToExecutionTime = ctx.getExecutionTime();
             if (scheduledToExecutionTime.toEpochMilli() <= clock.now().toEpochMilli()) {
                 LOG.info("Task-instance scheduled to run directly, triggering check for due exections (unless it is already running). Task: {}, instance: {}",
-                        ctx.getTaskInstanceId().getTaskName(), ctx.getTaskInstanceId().getId());
+                    ctx.getTaskInstanceId().getTaskName(), ctx.getTaskInstanceId().getId());
                 executeDueWaiter.wake();
             }
         }

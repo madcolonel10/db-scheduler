@@ -20,9 +20,9 @@ public class UnresolvedTaskMain {
     private static void example(DataSource dataSource) {
 
         RecurringTask<Void> unresolvedTask = Tasks.recurring("unresolved1", Schedules.fixedDelay(Duration.ofSeconds(1)))
-                .execute((taskInstance, executionContext) -> {
-                    System.out.println("Ran");
-                });
+            .execute((taskInstance, executionContext) -> {
+                System.out.println("Ran");
+            });
         RecurringTask<Void> unresolvedTask2 = Tasks.recurring("unresolved2", Schedules.fixedDelay(Duration.ofSeconds(1)))
             .execute((taskInstance, executionContext) -> {
                 System.out.println("Ran");
@@ -33,11 +33,11 @@ public class UnresolvedTaskMain {
         client.schedule(unresolvedTask2.instance(RecurringTask.INSTANCE), Instant.now().plusSeconds(10));
 
         final Scheduler scheduler = Scheduler
-                .create(dataSource)
-                .pollingInterval(Duration.ofSeconds(1))
-                .heartbeatInterval(Duration.ofSeconds(5))
-                .deleteUnresolvedAfter(Duration.ofSeconds(20))
-                .build();
+            .create(dataSource)
+            .pollingInterval(Duration.ofSeconds(1))
+            .heartbeatInterval(Duration.ofSeconds(5))
+            .deleteUnresolvedAfter(Duration.ofSeconds(20))
+            .build();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             LOG.info("Received shutdown signal.");
@@ -47,7 +47,8 @@ public class UnresolvedTaskMain {
         scheduler.start();
 
         IntStream.range(0, 5).forEach(i -> {
-            scheduler.getScheduledExecutions(e -> {});
+            scheduler.getScheduledExecutions(e -> {
+            });
             scheduler.getFailingExecutions(Duration.ZERO);
         });
     }

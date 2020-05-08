@@ -17,6 +17,7 @@ package com.github.kagkarlsson.scheduler.boot.config;
 
 import com.github.kagkarlsson.scheduler.SchedulerName;
 import com.github.kagkarlsson.scheduler.Serializer;
+
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 

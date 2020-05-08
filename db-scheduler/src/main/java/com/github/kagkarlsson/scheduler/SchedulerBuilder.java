@@ -21,6 +21,7 @@ import static com.github.kagkarlsson.scheduler.Scheduler.THREAD_PREFIX;
 import com.github.kagkarlsson.scheduler.stats.StatsRegistry;
 import com.github.kagkarlsson.scheduler.task.OnStartup;
 import com.github.kagkarlsson.scheduler.task.Task;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +30,7 @@ import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.sql.DataSource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,7 +80,7 @@ public class SchedulerBuilder {
     }
 
     public SchedulerBuilder pollingLimit(int pollingLimit) {
-        if(pollingLimit <= 0) {
+        if (pollingLimit <= 0) {
             throw new IllegalArgumentException("pollingLimit must be a positive integer");
         }
         this.pollingLimit = pollingLimit;
@@ -97,7 +99,7 @@ public class SchedulerBuilder {
 
     public SchedulerBuilder threads(int numberOfThreads) {
         this.executorThreads = numberOfThreads;
-        if(useDefaultPollingLimit) {
+        if (useDefaultPollingLimit) {
             this.pollingLimit = calculatePollingLimit();
         }
         return this;
@@ -158,7 +160,7 @@ public class SchedulerBuilder {
             tableName,
             schedulerName.getName());
         return new Scheduler(clock, taskRepository, taskResolver, executorThreads, candidateExecutorService,
-                schedulerName, waiter, heartbeatInterval, enableImmediateExecution, statsRegistry, pollingLimit,
+            schedulerName, waiter, heartbeatInterval, enableImmediateExecution, statsRegistry, pollingLimit,
             deleteUnresolvedAfter, startTasks);
     }
 }
