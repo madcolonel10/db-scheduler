@@ -34,6 +34,7 @@ public class MssqlCompatibilityTest extends CompatibilityTest {
         // init schema
         DbUtils.runSqlResource("/mssql_tables.sql").accept(pooledDatasource);
     }
+
     @Override
     public DataSource getDataSource() {
         return pooledDatasource;

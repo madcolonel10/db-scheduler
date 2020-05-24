@@ -40,6 +40,7 @@ public class NoAutoCommitPostgresqlCompatibilityTest extends CompatibilityTest {
         pooledDatasource = new HikariDataSource(hikariConfig);
 
     }
+
     @Override
     public DataSource getDataSource() {
         return pooledDatasource;

@@ -154,7 +154,7 @@ public class SchedulerBuilder {
         }
 
         if (schedulerName == null) {
-             schedulerName = new SchedulerName.Hostname();
+            schedulerName = new SchedulerName.Hostname();
         }
 
         final TaskResolver taskResolver = new TaskResolver(statsRegistry, clock, knownTasks);
