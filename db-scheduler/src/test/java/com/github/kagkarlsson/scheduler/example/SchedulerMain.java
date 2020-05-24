@@ -31,7 +31,7 @@ public class SchedulerMain {
                 System.out.println("Executing " + taskInstance.getTaskAndInstance());
             });
 
-        // recurring with contant data
+        // recurring with constant data
         RecurringTask<Integer> recurring2 = Tasks.recurring("recurring_constant_data", FixedDelay.of(Duration.ofSeconds(7)), Integer.class)
             .initialData(1)
             .onFailureReschedule()   // default
