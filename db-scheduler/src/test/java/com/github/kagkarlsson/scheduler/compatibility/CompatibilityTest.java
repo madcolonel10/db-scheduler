@@ -8,7 +8,6 @@ import com.github.kagkarlsson.scheduler.StopSchedulerExtension;
 import com.github.kagkarlsson.scheduler.TaskResolver;
 import com.github.kagkarlsson.scheduler.TestTasks;
 import com.github.kagkarlsson.scheduler.TestTasks.DoNothingHandler;
-import com.github.kagkarlsson.scheduler.jdbc.AutodetectJdbcCustomization;
 import com.github.kagkarlsson.scheduler.stats.StatsRegistry;
 import com.github.kagkarlsson.scheduler.task.Execution;
 import com.github.kagkarlsson.scheduler.task.TaskInstance;
@@ -16,9 +15,6 @@ import com.github.kagkarlsson.scheduler.task.helper.OneTimeTask;
 import com.github.kagkarlsson.scheduler.task.helper.RecurringTask;
 import com.github.kagkarlsson.scheduler.task.schedule.FixedDelay;
 import com.google.common.collect.Lists;
-<<<<<<<HEAD
-
-    =======
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,7 +22,6 @@ import org.junit.jupiter.api.extension.RegisterExtension;
 import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
->>>>>>>upstream/master
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -73,18 +68,11 @@ public abstract class CompatibilityTest {
 
         statsRegistry = new TestTasks.SimpleStatsRegistry();
         scheduler = Scheduler.create(getDataSource(), Lists.newArrayList(oneTime, recurring))
-            <<<<<<<HEAD
             .pollingInterval(Duration.ofMillis(10))
-            .heartbeatInterval(Duration.ofMillis(100))
-            .statsRegistry(statsRegistry)
-            .build();
-=======
-                .pollingInterval(Duration.ofMillis(10))
             .heartbeatInterval(Duration.ofMillis(100))
             .schedulerName(new SchedulerName.Fixed("test"))
             .statsRegistry(statsRegistry)
             .build();
->>>>>>>upstream / master
         stopScheduler.register(scheduler);
     }
 
